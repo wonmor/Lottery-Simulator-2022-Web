@@ -10,6 +10,7 @@ cffi==1.15.0
 chardet==4.0.0
 charset-normalizer==2.0.12
 click==8.0.3
+# cloudinary==1.29.0
 colorama==0.4.4
 configparser==5.2.0
 cookiecutter==1.7.3
@@ -18,6 +19,7 @@ cryptography==36.0.1
 distlib==0.3.4
 filelock==3.6.0
 Flask==2.0.3
+# Flask-Cors==3.0.10
 Flask-SQLAlchemy==2.5.1
 gunicorn==20.0.4
 h11==0.13.0
