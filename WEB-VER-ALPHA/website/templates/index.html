@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Lottery Simulator 2022</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono&amp;display=swap">
+    <link rel="stylesheet" href="{{ url_for('static',filename='fonts/font-awesome.min.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body id="page-top" data-bs-spy="scroll" data-bs-target="#mainNav" data-bs-offset="56">
+    <nav class="navbar navbar-light navbar-expand-lg fixed-top" id="mainNav" style="border-color: #ffffff;background: rgb(255,255,255);">
+        <div class="container"><a class="navbar-brand" href="/" style="color: rgb(0,0,0);font-family: 'Roboto Mono', monospace;">LOTTERY_SIMULATOR_2022</a><button data-bs-toggle="collapse" data-bs-target="#navbarResponsive" class="navbar-toggler float-end" aria-controls="navbarResponsive"
+                aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="/about" style="color: rgba(0,0,0,0.7);font-family: 'Roboto Mono', monospace;">ABOUT</a></li>
+                    <li class="nav-item"><a class="nav-link" href="https://github.com/HDSB-GWS-Brooks-202122-ICS3-04/guessing-game-p4-wonmor" style="color: rgba(0,0,0,0.7);font-family: 'Roboto Mono', monospace;">SOURCE_CODE</a></li>
+                    <li class="nav-item"></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    {% block content %} {% endblock content %}
+    <footer style="background: rgb(47,37,48);">
+        <div class="container">
+            <p style="color: rgb(255,255,255);font-family: 'Roboto Mono', monospace;">© John Seong 2022. Licensed under MIT.</p>
+            <ul class="list-inline">
+                <li class="list-inline-item"><a href="https://github.com/wonmor" style="color: rgb(255,255,255);font-family: 'Roboto Mono', monospace;">GitHub</a></li>
+                <li class="list-inline-item"><a href="https://johnseong.info/projects/" style="color: rgb(255,255,255);font-family: 'Roboto Mono', monospace;">Portfolio</a></li>
+                <li class="list-inline-item"><a href="https://www.youtube.com/channel/UC2O-C28dSgDTZcYxv9OX20w" style="color: rgb(255,255,255);font-family: 'Roboto Mono', monospace;">YouTube</a></li>
+            </ul>
+        </div>
+    </footer>
+    <script src="{{ url_for('static',filename='bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static',filename='js/script.min.js') }}"></script>
+</body>
+
+</html>
