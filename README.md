@@ -2,6 +2,8 @@
 
 Developed by **John Seong** in Ontario.
 
+[Launch Application](https://lottery-simulator-2022.herokuapp.com)
+
 ```
 #-----------------------------------------------------------------------------
 # Name:        Lottery Simulator 2022
@@ -29,9 +31,7 @@ Developed by **John Seong** in Ontario.
 ---
 
 ### Web Version
-Still work in progress! Implementing different features...
-
-[Launch Application](https://lottery-simulator-2022.herokuapp.com)
+Still **work in progress**! Currently working on the implementation of different features such as the leaderboard or the in-game currency..
 
 <img width="574" alt="Screen Shot 2022-03-03 at 12 39 07 AM" src="https://user-images.githubusercontent.com/35755386/156503277-3e560c27-067d-4744-aee5-8f34491125a5.png">
 
