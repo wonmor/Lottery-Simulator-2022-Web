@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------------
 # Name:        Lottery Simulator 2022
-# Purpose:     To encourage young people not to gamble on lotteries, as the probablity of correctly guessing the number is infinitemisially low!
+# Purpose:     To encourage young people not to gamble on lotteries, as the probablity of correctly guessing the number is infinitemisial!
 #
 # Author:      John Seong
 # Created:     25-Feb-2022
