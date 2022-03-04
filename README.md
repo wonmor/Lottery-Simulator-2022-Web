@@ -18,6 +18,7 @@ Still work in progress! Implementing different features...
 - **Flask** Micro Web Framework
 - **SQLAlchemy** Database
 - **Bootstrap** Front-End Framework
+- **jQuery** Javascript Library
 
 ---
 
