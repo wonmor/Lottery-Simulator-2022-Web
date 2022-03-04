@@ -2,6 +2,7 @@
 
 <head>
     <script src="../static/bootstrap/js/game.js"></script>
+    <link rel="stylesheet" href="../static/bootstrap/css/style.css">
 </head>
 <header class="masthead" style="background: lightgray">
     <div class="container h-100">
@@ -12,6 +13,10 @@
                     <h3 id="guide-text-2" style="font-family: 'Roboto Mono', monospace; text-transform: uppercase; color: white">DON'T HESITATE! GO ON!</h3><br>
                     <form action="" name="frm" method="post">
                         <input class="form-control" type="text" id="name" name="name" placeholder="Enter your nickname...">
+                        <br>
+                        <div id="array-renderer">
+                            <h3 id="numbers-list" style="font-family: 'Roboto Mono', monospace; text-transform: uppercase; color: white">NULL</h3><br>
+                        </div>
                         <br><a class="btn btn-outline-warning btn-xl" role="button" id="button" onclick="onClickEvent()" href="#download" style="color: white;font-family: 'Roboto Mono', monospace;font-size: 20px; justify-self: center; align-self: center">Next</a>
                         <br><br>
                         <p id="warning" style="display: none; font-family: 'Roboto Mono', monospace; text-transform: uppercase; color: lightcoral">The value you entered is invalid. Please try it again.</p>

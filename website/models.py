@@ -9,6 +9,7 @@ import random
 
 # A module that allows the program to easily compute the number of permutations or combinations of a given list
 from itertools import permutations
+from unicodedata import name
 
 # Import the 'db' variable from extensions.py
 from .extensions import db
@@ -32,13 +33,10 @@ class PlayerCurrency(db.Model):
     # Set the default date and time to the UTC standard time
     date_added = db.Column(db.DateTime, default=datetime.utcnow)
 
-    def __init__(self, min_value, max_value, count, current_set, chances):
-        self.min_value = min_value  # Minimum value that the raodom number can be
-        self.max_value = max_value  # Maximum value that the random numbers can be
-        self.count = count  # Number of draws
-        # A list that contains the set that computer generated, containing machine-picked arbitrary numbers
-        self.current_set = current_set
-        self.chances = chances  # Chances of winning, calculated by the computer
+    def __init__(self, name, successes):
+        self.name = name
+        self.coins = 0
+        self.successes = successes
 
     def __repr__(self):
         return f'<Name {self.name}>'
@@ -71,13 +69,13 @@ class PlayerCurrency(db.Model):
 
 class RandomSet():
 
-    def __init__(self, min_value, max_value, count, current_set, chances):
+    def __init__(self, min_value, max_value, draws):
         self.min_value = min_value  # Minimum value that the raodom number can be
         self.max_value = max_value  # Maximum value that the random numbers can be
-        self.count = count  # Number of draws
+        self.count = draws  # Number of draws
         # A list that contains the set that computer generated, containing machine-picked arbitrary numbers
-        self.current_set = current_set
-        self.chances = chances  # Chances of winning, calculated by the computer
+        self.current_set = []
+        self.chances = 0  # Chances of winning, calculated by the computer
 
     # Generate a set containing completely arbitrary numbers
     def generate(self):

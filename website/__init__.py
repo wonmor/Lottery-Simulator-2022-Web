@@ -1,23 +1,24 @@
 from .extensions import db
 from flask import Flask
 
+import os
+
 
 def create_app():
     # Initialize the app
     app = Flask(__name__, instance_relative_config=True)
 
-    # Load the views; app_context function enables the developer to use a proxy variable (or a delegate) instead of directly importing the app variable from views.py
-    # with app.app_context():
-    #     from . import views
+    # GENERATE REQUIREMENTS.TXT: pip3 freeze > requirements.txt
 
     from . import views
     app.register_blueprint(views.bp)
     # SETTING UP THE BLUEPRINT TO PREVENT CIRCULAR IMPORT; TUTORIAL: https://stackoverflow.com/questions/23432791/how-to-handle-dynamic-decorators-in-python-easily
 
+    # HOW TO OUTSOURCE SECRET KEY SO THAT IT DOES NOT GET COMMITED TO GITHUB: https://stackoverflow.com/questions/51228227/standard-practice-for-wsgi-secret-key-for-flask-applications-on-github-reposito
+
     # Load the config
-    app.config.update(
-        SECRET_KEY='192b9bdd22ab9ed4d12e236c78afcb9a393ec15f71bbf5dc987d54727823bcbf',
-    )
+    app.config["SECRET_KEY"]='192b9bdd22ab9ed4d12e236c78afcb9a393ec15f71bbf5dc987d54727823bcbf'
+    # app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY") => FOR DISTRIBUTION PURPOSES (TO HIDE THE API KEY)
 
     # Add SQLAlchemy database
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///players.db'

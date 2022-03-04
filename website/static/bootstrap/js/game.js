@@ -1,47 +1,67 @@
 // TO DO: MAKE THE BAREBONE APP FIRST AND THEN PRETTIFY IT!
-var counter = 0;
-// Button counter
+var counter = 0; // Button counter
+
+var dict = {
+    'name': 0,
+    'range': 1,
+    'draws': 2
+};
 
 function onClickEvent() {
-    // Get the input field
-    var input = document.getElementById("name");
-    var warning = document.getElementById("warning")
-    var guide_text = document.getElementById("guide-text")
-    var guide_text_2 = document.getElementById("guide-text-2")
+    // Define all the elements by their ID...
+    const input = document.getElementById("name");
+    const warning = document.getElementById("warning");
+    const guide_text = document.getElementById("guide-text");
+    const guide_text_2 = document.getElementById("guide-text-2");
+    const array_renderer = document.getElementById("array-renderer");
+    const numbers_list = document.getElementById("numbers-list");
 
-    const name_of_input = document.getElementById("name").innerHTML
+    const name_of_input = document.getElementById("name").innerHTML;
 
+    const answers = []; // List for storing all the answers
+
+    // When no value is entered in the input, throw an error message...
     if (document.forms['frm'].name.value === "") {
         warning.style.display = 'block';
     } else {
         warning.style.display = 'none';
+        answers.push(document.forms['frm'].name.value);
         counter++;
-        document.forms['frm'].name.value = ""
+        document.forms['frm'].name.value = "";
     }
 
     // Scene transition when the submit button is pressed once... twice... three times... etc.
     if (counter == 1) {
-        guide_text.innerHTML = "SET THE<br>RANGE OF<br>POSSIBLE<br>NUMBERS"
-        guide_text_2.innerHTML = "DON'T GO CRAZY!"
-        input.placeholder = "Enter min. and max. values seperated by a space..."
+        guide_text.innerHTML = "SET THE<br>RANGE OF<br>POSSIBLE<br>NUMBERS";
+        guide_text_2.innerHTML = "DON'T GO CRAZY!";
+        input.placeholder = "Enter min. and max. values seperated by a space...";
+    } else if (counter == 2) {
+        guide_text.innerHTML = "HOW MANY<br>DRAWS?";
+        guide_text_2.innerHTML = "IS MURPHY'S LAW REAL?";
+        input.placeholder = "Enter the number of draws...";
+    } else if (counter == 3) {
         $.ajax({
-            url: '{{ url_for('
-            view.path ') }}',
+            url: '{{ url_for(views.submit) }}',
             type: 'POST',
             data: {
-                name: name
+                nickname: answers[dict['name']],
+                range: answers[dict['range']],
+                draws: answers[dict['draws']]
             },
-            success: function(response) {},
-            error: function(response) {}
+            success: function(response) {
+                console.log("Successful attempt at retrieving the data!");
+                warning.style.display = 'none';
+            },
+            error: function(response) {
+                warning.style.display = 'block';
+                warning.innerHTML = "ERROR WHILE RETRIEVING THE LIST!"
+            }
         });
-
-    } else if (counter == 2) {
-        guide_text.innerHTML = "HOW MANY<br>DRAWS?"
-        guide_text_2.innerHTML = "IS MURPHY'S LAW REAL?"
-        input.placeholder = "Enter the number of draws..."
-    } else if (counter == 3) {
-        guide_text.innerHTML = "GUESS THE<br>NUMBERS IN A<br>1 * ${draws} ARRAY!"
-        input.placeholder = "Enter the values seperated by a space..."
+        guide_text.innerHTML = "GUESS THE<br>NUMBERS IN A<br>" + answers[dict['draws']] + " * 1 ARRAY!";
+        array_renderer.style.display = 'block';
+        // Parse the JSON file handed over by views.py (set that contains random numbers)
+        numbers_list.innerHTML = JSON.parse(data.random_set_json);
+        input.placeholder = "Enter the values seperated by a space...";
     }
 }
 

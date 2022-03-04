@@ -41,3 +41,5 @@ if __name__ == '__main__':
 # pip3 install -r requirements.txt to install the plugins when VENV is newly installed
 
 # Some of the difficulties that I faced: Flask micro web framework is notorious for its difficulties in implementing a many-file structure without using a template generator
+
+# TO DO: USE AMAZON WEB SERVICES TO UPLOAD IMAGES ON HEROKU (BG-IMAGE)
