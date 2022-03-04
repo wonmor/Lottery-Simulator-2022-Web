@@ -22,6 +22,7 @@ Developed by **John Seong** in Ontario.
 #   Not only does it allow user to guess one number at a time, but multiple numbers stored in a dictionary
 #   In-game currency system that syncronizes with the SQLAlchemy database, which also generates the player leaderboard
 #   Game hosted on a cloud platform Heroku
+#   Used AJAX for communication between JAVASCRIPT and PYTHON files (via JSON)
 #-----------------------------------------------------------------------------
 ```
 
