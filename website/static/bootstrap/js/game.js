@@ -33,7 +33,7 @@ function onClickEvent() {
     // Scene transition when the submit button is pressed once... twice... three times... etc.
     if (counter == 1) {
         guide_text.innerHTML = "SET THE<br>RANGE OF<br>POSSIBLE<br>NUMBERS";
-        guide_text_2.innerHTML = "DON'T GO CRAZY!";
+        guide_text_2.innerHTML = "DON'T GO TOO CRAZY!";
         input.placeholder = "Enter min. and max. values seperated by a space...";
     } else if (counter == 2) {
         guide_text.innerHTML = "HOW MANY<br>DRAWS?";
