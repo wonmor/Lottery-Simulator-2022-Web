@@ -30,7 +30,7 @@
                 warning.style.display = 'none';
                 console.log("counter = " + counter);
                 console.log("input_value = " + input_value);
-                answers.push(input_value);
+                answers[counter] = input_value.toString();
                 counter++;
                 document.forms['frm'].name.value = "";
             }
