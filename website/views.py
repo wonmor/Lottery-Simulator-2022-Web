@@ -29,7 +29,7 @@ config.read(cfg_path)
 # Fix the 'failed to load' error!
 try:
     default_count = config.getint("default", "NUM_OF_NUMS")
-    default_coins = config.getint("default","MONEY")
+    default_coins = config.getint("default", "MONEY")
 except:
     print('CFG file failed to load twice!')
 
@@ -44,25 +44,26 @@ def index():
 
         if allow_cookies == 'allow' and decline_cookies != 'decline':
             cookiesAvail = True
-        
+
         if decline_cookies == 'decline' and allow_cookies != 'allow':
             cookiesAvail = False
 
     return render_template("home.html")
+
 
 @bp.route('/about')
 def about():
     session.clear()
     return render_template("about.html")
 
+
 @bp.route('/game', methods=['GET', 'POST'])
 def game():
     if request.method == 'POST':
-        # Clear the session
-        session.clear()
         # Get all the user input values from game.js
         player_name = json.loads(request.form['nickname'])
-        player_range = json.loads(request.form['range']).split(' ') # player_range[0] => min value, player_range[1] => max value
+        # player_range[0] => min value, player_range[1] => max value
+        player_range = json.loads(request.form['range']).split(' ')
         player_draws = json.loads(request.form['draws'])
         # Define a random list object (instantiating a class located in models.py)
         random_set = RandomSet(player_range[0], player_range[1], player_draws)
@@ -71,10 +72,14 @@ def game():
         # Convert the generated random list (Python) into JSON-compatible string, so we can hand it over to game.js
         random_set_json = json.dumps(random_set.current_set)
 
+        return random_set_json;
+
         # INTERACTION BETWEEN JAVASCRIPT AND PYTHON (FLASK) USING AJAX AND JSONIFY: https://ayumitanaka13.medium.com/how-to-use-ajax-with-python-flask-729c0a8e5346
         # HOW PYTHON-JSON CONVERSION WORKS USING THE JSON MODULE: https://www.w3schools.com/python/python_json.asp
 
-        
+    # Clear the session
+    session.clear()
+
     return render_template("game.html")
 
 # AJAX METHOD: https://ayumitanaka13.medium.com/how-to-use-ajax-with-python-flask-729c0a8e5346

@@ -20,16 +20,17 @@
             const array_renderer = document.getElementById("array-renderer");
             const numbers_list = document.getElementById("numbers-list");
 
-            const name_of_input = document.getElementById("name").innerHTML;
-
             const answers = []; // List for storing all the answers
 
             // When no value is entered in the input, throw an error message...
             if (document.forms['frm'].name.value === "") {
                 warning.style.display = 'block';
             } else {
+                var input_value = $('#name').val();
                 warning.style.display = 'none';
-                answers.push(document.forms['frm'].name.value);
+                console.log("counter = " + counter);
+                console.log("input_value = " + input_value);
+                answers.push(input_value);
                 counter++;
                 document.forms['frm'].name.value = "";
             }
@@ -43,25 +44,27 @@
                 guide_text.innerHTML = "HOW MANY<br>DRAWS?";
                 guide_text_2.innerHTML = "IS MURPHY'S LAW REAL?";
                 input.placeholder = "Enter the number of draws...";
-                answers.push(document.forms['frm'].name.value);
             } else if (counter == 3) {
                 $.ajax({
-                    url: '{{ url_for("main.game") }}',
+                    url: '/game',
                     type: 'POST',
                     data: {
-                        nickname: answers[dict['name']],
-                        range: answers[dict['range']],
-                        draws: answers[dict['draws']]
+                        nickname: JSON.stringify(answers[dict['name']]),
+                        range: JSON.stringify(answers[dict['range']]),
+                        draws: JSON.stringify(answers[dict['draws']])
                     },
+                    contentType: "application/json",
+                    dataType: 'json',
                     success: function(response) {
                         console.log("Successful attempt at retrieving the data!");
-                        warning.style.display = 'none';
                     },
                     error: function(response) {
                         warning.style.display = 'block';
                         warning.innerHTML = "ERROR WHILE RETRIEVING THE LIST!"
                     }
                 });
+                console.log(answers);
+                warning.style.display = 'none';
                 guide_text.innerHTML = "GUESS THE<br>NUMBERS IN A<br>" + answers[dict['draws']] + " * 1 ARRAY!";
                 array_renderer.style.display = 'block';
                 // Parse the JSON file handed over by views.py (set that contains random numbers)
@@ -71,13 +74,13 @@
         }
 
         // Execute a function when the user releases a key on the keyboard => NEEDS FIX! DOESN'T WORK!
-        input.addEventListener("keyup", function(event) {
+        $("#name").keyup(function(event) {
             // Number 13 is the "Enter" key on the keyboard
             if (event.keyCode === 13) {
                 // Cancel the default action, if needed
                 event.preventDefault();
                 // Trigger the button element with a click
-                document.getElementById("button").click();
+                document.querySelector("#button").click();
             }
         });
     </script>
@@ -90,13 +93,13 @@
                 <div class="mx-auto header-content" style="background: rgba(47,37,48, 1);padding: 30px;border-radius: 34px; ;border-color: white;margin: 6px; color: white">
                     <h1 class="mb-5" id="guide-text" style="font-family: 'Roboto Mono', monospace;color: white;text-align: center;">WHAT IS<br>YOUR NAME?</h1>
                     <h3 id="guide-text-2" style="font-family: 'Roboto Mono', monospace; text-transform: uppercase; color: white">DON'T HESITATE! GO ON!</h3><br>
-                    <form action="" name="frm" method="post">
+                    <form action="" name="frm">
                         <input class="form-control" type="text" id="name" name="name" placeholder="Enter your nickname...">
                         <br>
                         <div id="array-renderer">
                             <h3 id="numbers-list" style="font-family: 'Roboto Mono', monospace; text-transform: uppercase; color: white">NULL</h3><br>
                         </div>
-                        <br><a class="btn btn-outline-warning btn-xl" role="button" id="button" onclick="onClickEvent()" href="#download" style="color: white;font-family: 'Roboto Mono', monospace;font-size: 20px; justify-self: center; align-self: center">Next</a>
+                        <br><a class="btn btn-outline-warning btn-xl" role="button" id="button" onclick="onClickEvent()" style="color: white;font-family: 'Roboto Mono', monospace;font-size: 20px; justify-self: center; align-self: center">Next</a>
                         <br><br>
                         <p id="warning" style="display: none; font-family: 'Roboto Mono', monospace; text-transform: uppercase; color: lightcoral">The value you entered is invalid. Please try it again.</p>
                     </form>
