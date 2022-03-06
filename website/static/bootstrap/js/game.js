@@ -7,7 +7,6 @@ var dict = {
     'name': 0,
     'range': 1,
     'draws': 2,
-    'guesses': 3
 };
 
 var answers = new Array(); // Array for storing all the answers
@@ -141,7 +140,7 @@ function onClickEvent() {
             console.log("JSONIFIED DRAWS: " + JSON.stringify(answers[dict['draws']]));
         } else if (counter >= 4) {
             // Check if the user guessed all the number right or not...
-            const guesses = answers[dict['guesses']].split(" ").map(Number);;
+            const guesses = answers[counter - 1].split(" ").map(Number);;
             var random_set = [];
 
             // Convert JSON array into Javascript array
