@@ -9,7 +9,8 @@ import random
 
 # A module that allows the program to easily compute the number of permutations or combinations of a given list
 from itertools import permutations
-from unicodedata import name
+
+from flask import current_app
 
 # Import the 'db' variable from extensions.py
 from .extensions import db
@@ -69,9 +70,9 @@ class PlayerCurrency(db.Model):
 class RandomSet():
 
     def __init__(self, min_value, max_value, draws):
-        self.min_value = min_value  # Minimum value that the raodom number can be
-        self.max_value = max_value  # Maximum value that the random numbers can be
-        self.count = draws  # Number of draws
+        self.min_value = int(min_value)  # Minimum value that the raodom number can be
+        self.max_value = int(max_value)  # Maximum value that the random numbers can be
+        self.count = int(draws)  # Number of draws
         # A list that contains the set that computer generated, containing machine-picked arbitrary numbers
         self.current_set = []
         self.chances = 0  # Chances of winning, calculated by the computer
@@ -86,6 +87,9 @@ class RandomSet():
         # Calculate the chances and store it in the instance's variable
         self.chances = calculate_chances(self.current_set, self.count)
 
+        current_app.logger.debug(self.current_set)
+        current_app.logger.debug("chances: " + self.chances)
+
 
 def calculate_chances(current_set, count):
     """
@@ -93,7 +97,8 @@ def calculate_chances(current_set, count):
     by using the permuation formula
     and converting it to a percentage.
     """
-    return str(f'{(1 / len(permutations(current_set, count))) * 100} %')
+    return str(f'{(1 / len(list(permutations(current_set, count)))) * 100} %')
+
 
 # DEVELOPER'S NOTE AND USEFUL LINKS:
 # HOW TO READ THE CONFIG.CFG FILE IN A PYTHON SCRIPT: https://stackoverflow.com/questions/45694680/create-enum-constant-in-flask-python
