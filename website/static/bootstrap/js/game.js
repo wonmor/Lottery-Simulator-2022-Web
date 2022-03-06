@@ -126,10 +126,11 @@ function onClickEvent() {
             console.log("JSONIFIED NAME: " + JSON.stringify(answers[dict['name']]));
             console.log("JSONIFIED RANGE: " + JSON.stringify(answers[dict['range']]));
             console.log("JSONIFIED DRAWS: " + JSON.stringify(answers[dict['draws']]));
-        } else if (counter == 4) {
+        } else if (counter >= 4) {
             // Check if the user guessed all the number right or not...
             const guesses = answers[dict['guesses']].split(" ").map(Number);;
             var random_set = [];
+
             // Convert JSON array into Javascript array
             for (var i in random_set_json)
                 random_set.push(random_set_json[i]);
@@ -142,13 +143,16 @@ function onClickEvent() {
             } else {
                 guide_text_2.innerHTML = "OOPS! YOU GOT THEM WRONG!";
                 guide_text_2.style.color = 'lightcoral';
+                // Add functionality 
             }
-            counter = 5;
+        }
+        /*
         } else if (counter >= 5) {
             console.log("Reached count >= 5!")
             button.innerText = "QUIT";
             button.setAttribute("onclick", "window.location.href='/';")
         }
+        */
 
         // WHERE I GOT INSTRUCTIONS FOR AJAX METHOD: https://stackoverflow.com/questions/66939921/problem-sending-data-with-ajax-to-django-server
 
