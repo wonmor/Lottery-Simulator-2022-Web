@@ -5,30 +5,20 @@ Developed by **John Seong** in Ontario.
 [Launch Application](https://lottery-simulator-2022.herokuapp.com)
 
 ```
-#-----------------------------------------------------------------------------
-# Name:        Lottery Simulator 2022
-# Purpose:     To encourage young people not to gamble on lotteries, as the probablity of correctly guessing the number is infinitemisial!
-#
-# Author:      John Seong
-# Created:     25-Feb-2022
-# Updated:     06-Mar-2022
-#-----------------------------------------------------------------------------
-# I think this project deserves a level 4+ because...
-#
 # Features Added:
 #   Game being entirely web-based using the Flask micro web framework
 #   Utilization of both functional programming and object-oriented programming
 #   Calculate the chances of winning for the sake of learning why gambling is risky
-#   After a set of number is entered by the user, the combinations will reset and the program will give completely an arbitrary number set differing from the previous one
+#   If the values entered by the user go beyond and above the constraints set by the computer in order to not overload the client-server communication, the website will throw an error
 #   The user can change the difficulty setting, which will determine the constraint of the possible number set 
 #   Not only does it allow user to guess one number at a time, but multiple numbers stored in a dictionary
 #   In-game currency system that syncronizes with the SQLAlchemy database, which also generates the player leaderboard
 #
 # TECHNICAL ASPECTS:
 #   Game hosted on a cloud platform Heroku
-#   Used jQuery's AJAX for communication between JAVASCRIPT and PYTHON files (via JSON)
-#   SERVER SIDE HANDLES ALL THE CALCULATIONS AND RANDOM NUMBER GENERATION PROCESS FOR ANTI-CHEAT PURPOSES; CLIENT SIDES ONLY HANDLES THE ON CLICK RESPONSES
-#-----------------------------------------------------------------------------
+#   Used jQuery's AJAX for communication between JAVASCRIPT and PYTHON files (via JSON) => ALLOWS MINIMAL AMOUNT OF SCREEN REFRESH
+#   SERVER SIDE HANDLES ALL THE CALCULATIONS AND RANDOM NUMBER GENERATION PROCESS FOR ANTI-CHEAT PURPOSES; CLIENT SIDE ONLY HANDLES THE ON CLICK RESPONSES
+#   UTILIZATION OF STRING MANIPULATIONS
 ```
 
 ---
