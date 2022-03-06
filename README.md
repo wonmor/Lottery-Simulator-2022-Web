@@ -11,7 +11,7 @@ Developed by **John Seong** in Ontario.
 #
 # Author:      John Seong
 # Created:     25-Feb-2022
-# Updated:     01-Mar-2022
+# Updated:     06-Mar-2022
 #-----------------------------------------------------------------------------
 # I think this project deserves a level 4+ because...
 #
@@ -23,17 +23,20 @@ Developed by **John Seong** in Ontario.
 #   The user can change the difficulty setting, which will determine the constraint of the possible number set 
 #   Not only does it allow user to guess one number at a time, but multiple numbers stored in a dictionary
 #   In-game currency system that syncronizes with the SQLAlchemy database, which also generates the player leaderboard
+#
+# TECHNICAL ASPECTS:
 #   Game hosted on a cloud platform Heroku
-#   Used AJAX for communication between JAVASCRIPT and PYTHON files (via JSON)
+#   Used jQuery's AJAX for communication between JAVASCRIPT and PYTHON files (via JSON)
+#   SERVER SIDE HANDLES ALL THE CALCULATIONS AND RANDOM NUMBER GENERATION PROCESS FOR ANTI-CHEAT PURPOSES; CLIENT SIDES ONLY HANDLES THE ON CLICK RESPONSES
 #-----------------------------------------------------------------------------
 ```
 
 ---
 
 ### Web Version
-Still **work in progress**! Currently working on the implementation of different features such as the leaderboard or the in-game currency..
+Currently working on the implementation of **additional** features such as the **leaderboard** or the **in-game currency**. **Base game** is **complete**.
+<img width="558" alt="Screen Shot 2022-03-06 at 2 15 57 AM" src="https://user-images.githubusercontent.com/35755386/156915177-2c1886ce-36cb-4b38-8555-e908e00d1383.png">
 
-<img width="574" alt="Screen Shot 2022-03-03 at 12 39 07 AM" src="https://user-images.githubusercontent.com/35755386/156503277-3e560c27-067d-4744-aee5-8f34491125a5.png">
 
 ---
 
