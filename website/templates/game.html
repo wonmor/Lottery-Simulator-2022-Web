@@ -6,27 +6,29 @@
     <script type="text/javascript"></script>
     <link rel="stylesheet" href="../static/bootstrap/css/style.css">
 </head>
-<header class="masthead" style="background: lightgray">
-    <div class="container h-100">
-        <div class="row h-100">
-            <div class="col-lg-7 my-auto" style="border-style: none;">
-                <div class="mx-auto header-content" style="background: rgba(47,37,48, 1);padding: 30px;border-radius: 34px; ;border-color: white;margin: 6px; color: white">
-                    <h1 class="mb-5" id="guide-text" style="font-family: 'Roboto Mono', monospace;color: white;text-align: center;">WHAT IS<br>YOUR NAME?</h1>
-                    <h3 id="guide-text-2" style="font-family: 'Roboto Mono', monospace; text-transform: uppercase; color: white">DON'T HESITATE! GO ON!</h3><br>
-                    <form action="" name="frm" role="form" onsubmit="onClickEvent();">
-                        <input class="form-control" type="name" id="name" name="name" placeholder="Enter your nickname..." onsubmit="onClickEvent();">
-                        <br>
-                        <div id="array-renderer">
-                            <h3 id="numbers-list" style="font-family: 'Roboto Mono', monospace; text-transform: uppercase; color: lightsalmon">NULL</h3><br>
-                        </div>
-                        <br><a class="btn btn-outline-warning btn-xl" role="button" id="button" onclick="onClickEvent()" style="color: white;font-family: 'Roboto Mono', monospace;font-size: 20px; justify-self: center; align-self: center">Next</a>
-                        <br><br>
-                        <p id="warning" style="display: none; font-family: 'Roboto Mono', monospace; text-transform: uppercase; color: lightcoral">The value you entered is invalid. Please try it again.</p>
-                    </form>
+<header class="masthead">
+    <article class="wrapper_game">
+        <div class="container h-100">
+            <div class="row h-100">
+                <div class="col-lg-7 my-auto" style="border-style: none;">
+                    <div class="mx-auto header-content" style="background: rgba(47,37,48, 1);padding: 30px;border-radius: 34px; ;border-color: white;margin: 6px; color: white">
+                        <h1 class="mb-5" id="guide-text" style="font-family: 'Roboto Mono', monospace;color: white;text-align: center;">WHAT IS<br>YOUR NAME?</h1>
+                        <h3 id="guide-text-2" style="font-family: 'Roboto Mono', monospace; text-transform: uppercase; color: white">DON'T HESITATE! GO ON!</h3><br>
+                        <form action="" name="frm" role="form" onsubmit="onClickEvent();">
+                            <input class="form-control" type="name" id="name" name="name" placeholder="Enter your nickname..." onsubmit="onClickEvent();">
+                            <br>
+                            <div id="array-renderer">
+                                <h3 id="numbers-list" style="font-family: 'Roboto Mono', monospace; text-transform: uppercase; color: lightsalmon">NULL</h3><br>
+                            </div>
+                            <br><a class="btn btn-outline-warning btn-xl" role="button" id="button" onclick="onClickEvent()" style="color: white;font-family: 'Roboto Mono', monospace;font-size: 20px; justify-self: center; align-self: center">Next</a>
+                            <br><br>
+                            <p id="warning" style="display: none; font-family: 'Roboto Mono', monospace; text-transform: uppercase; color: lightcoral">The value you entered is invalid. Please try it again.</p>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </article>
 </header>
 
 {% endblock content %}
