@@ -18,8 +18,8 @@ var random_set_json = new Array(); // Array for storing the computer-generated r
 $(document).ready(function() {
     document.getElementById("name").addEventListener("keyup", function(event) {
         event.preventDefault();
-        console.log("Entered the even listener - input field - to detect enter key")
         event.stopImmediatePropagation();
+        console.log("Entered the even listener - input field - to detect enter key")
         if (event.code === 'Enter') {
             document.querySelector("#button").click();
             console.log('ENTER');
@@ -54,7 +54,7 @@ function onClickEvent() {
             // Below is a user input reading logic that determine if the input value exceeds the limitations depending on the type of the question which is determined by the total number of button presses...
             if (counter == 0) {
                 // Check if input_value is a number or a string; if it's a number deny the request...
-                if (isNaN(input_value) == true) {
+                if (isNaN(input_value.replace(' ', '')) == true) {
                     answers.push(input_value);
                     increase_count_avail = true;
                 } else {
