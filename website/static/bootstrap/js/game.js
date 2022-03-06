@@ -72,7 +72,7 @@ function onClickEvent() {
                     increase_count_avail = false;
                 }
             } else if (counter == 2) {
-                if (input_value >= 1 && input_value <= 20) {
+                if (input_value >= 1 && input_value <= 10) {
                     answers.push(input_value);
                     increase_count_avail = true;
                 } else {
@@ -102,7 +102,7 @@ function onClickEvent() {
             input.placeholder = "Enter the values seperated by a space...";
         } else if (counter == 2) {
             guide_text.innerHTML = "HOW MANY<br>DRAWS?";
-            guide_text_2.innerHTML = "DO NOT ENTER CRAZY NUMBERS!";
+            guide_text_2.innerHTML = "THE COMPUTER CAN DRAW UP TO 10 NUMBERS!";
             input.placeholder = "Enter the number of draws...";
         } else if (counter == 3) {
             // Sets up the communication channel between Javascript and Python file via AJAX (uses JSON and HTTP) => a better alternative would be SOCKET
