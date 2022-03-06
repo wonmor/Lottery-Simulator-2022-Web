@@ -14,6 +14,7 @@ var answers = new Array(); // Array for storing all the answers
 
 var random_set_json = new Array(); // Array for storing the computer-generated random set of numbers
 
+<<<<<<< HEAD
 // Execute a function when the user releases a key on the keyboard => NEEDS FIX! DOESN'T WORK!
 $(document).ready(function() {
     document.getElementById("name").addEventListener("keyup", function(event) {
@@ -28,6 +29,8 @@ $(document).ready(function() {
     });
 });
 
+=======
+>>>>>>> parent of a72f1de (Fixed the background image issue)
 // This function runs when the form is submitted... ('next' button is clicked)
 document.querySelector("#button").addEventListener("click", function onclick(event) {
     // event.preventDefault();
@@ -170,5 +173,16 @@ document.querySelector("#button").addEventListener("click", function onclick(eve
         */
 
         // WHERE I GOT INSTRUCTIONS FOR AJAX METHOD: https://stackoverflow.com/questions/66939921/problem-sending-data-with-ajax-to-django-server
+
+        // Execute a function when the user releases a key on the keyboard => NEEDS FIX! DOESN'T WORK!
+        $("#name").keyup(function(event) {
+            // Number 13 is the "Enter" key on the keyboard
+            if (event.keyCode === 13) {
+                // Cancel the default action, if needed
+                event.preventDefault();
+                // Trigger the button element with a click
+                document.querySelector("#button").click();
+            }
+        });
     });
 });

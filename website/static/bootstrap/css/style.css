@@ -45,7 +45,12 @@
 }
 
 #master {
+<<<<<<< HEAD
     background-image: url('../../img/officialbackground.jpg')
+=======
+    background: lightgray;
+    /* background: url('/website/static/img/91477540-geld-nahtlose-muster-linienart-finances-endlosen-hintergrund-geschäft-bank-die-beschaffenheit-mit-do.jpg') => USE AMAZON AWS TO UPLOAD STATIC IMAGES SEPERATELY TO HEROKU!*/
+>>>>>>> parent of a72f1de (Fixed the background image issue)
 }
 
 #array-renderer {
