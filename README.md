@@ -36,7 +36,7 @@ Developed by **John Seong** in Ontario.
 ### Web Version
 Currently working on the implementation of **additional** features such as the **leaderboard** or the **in-game currency**. **Base game** is **complete**.
 
-<img width="558" alt="Screen Shot 2022-03-06 at 2 15 57 AM" src="https://user-images.githubusercontent.com/35755386/156915177-2c1886ce-36cb-4b38-8555-e908e00d1383.png">
+<img width="534" alt="Screen Shot 2022-03-06 at 3 20 44 AM" src="https://user-images.githubusercontent.com/35755386/156915228-2ed4ecf4-2ae6-4fe6-a6ef-f72f8f8f6462.png">
 
 ---
 
