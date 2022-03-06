@@ -44,6 +44,7 @@ function onClickEvent() {
             warning.style.display = 'block';
             // Give an exception to the case when counter = 3: skip the random number generation process (In case the user guesses the number wrong and tries again, do NOT reset the random number set)
             if (counter == 3) {
+                warning.innerHTML = 'PLEASE ENTER THE VALUES, WILL YOU?'
                 skip_random_gen = true
             }
         } else {
