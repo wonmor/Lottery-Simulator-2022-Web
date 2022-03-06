@@ -56,7 +56,7 @@ function onClickEvent() {
                     increase_count_avail = true;
                 } else {
                     warning.style.display = 'block';
-                    warning.innerHTML = "TOLD YOU TO NOT GO CRAZY!"
+                    warning.innerHTML = "TOLD YOU NOT TO GO CRAZY!"
                     increase_count_avail = false;
                 }
             } else if (counter == 2) {
@@ -65,7 +65,7 @@ function onClickEvent() {
                     increase_count_avail = true;
                 } else {
                     warning.style.display = 'block';
-                    warning.innerHTML = "TOLD YOU TO NOT GO CRAZY!"
+                    warning.innerHTML = "TOLD YOU NOT TO GO CRAZY!"
                     increase_count_avail = false;
                 }
                 // If the cases above are not being met just append the value into the array without making exceptions or setting limitations...
