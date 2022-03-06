@@ -1,11 +1,11 @@
-#-----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 # Name:        Lottery Simulator 2022
 # Purpose:     To encourage young people not to gamble on lotteries, as the probablity of correctly guessing the number is infinitemisial!
 #
 # Author:      John Seong
 # Created:     25-Feb-2022
-# Updated:     01-Mar-2022
-#-----------------------------------------------------------------------------
+# Updated:     05-Mar-2022
+# -----------------------------------------------------------------------------
 # I think this project deserves a level 4+ because...
 #
 # Features Added:
@@ -16,9 +16,14 @@
 #   The user can change the difficulty setting, which will determine the constraint of the possible number set 
 #   Not only does it allow user to guess one number at a time, but multiple numbers stored in a dictionary
 #   In-game currency system that syncronizes with the SQLAlchemy database, which also generates the player leaderboard
+#
+# TECHNICAL ASPECTS:
 #   Game hosted on a cloud platform Heroku
-#   Used AJAX for communication between JAVASCRIPT and PYTHON files (via JSON)
-#-----------------------------------------------------------------------------
+#   Used jQuery's AJAX for communication between JAVASCRIPT and PYTHON files (via JSON)
+#   SERVER SIDE HANDLES ALL THE CALCULATIONS AND RANDOM NUMBER GENERATION PROCESS FOR ANTI-CHEAT PURPOSES; CLIENT SIDES ONLY HANDLES THE ON CLICK RESPONSES
+# -----------------------------------------------------------------------------
+# DEVELOPPER'S NOTE:
+# FLASK-SOCKETIO IMPLEMENTATION TUTORIAL: https://medium.com/swlh/implement-a-websocket-using-flask-and-socket-io-python-76afa5bbeae1
 
 # Import the create_app function from __init__.py
 from website import create_app

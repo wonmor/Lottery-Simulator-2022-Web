@@ -17,7 +17,6 @@ from .extensions import db
 # Date and time module that will allow us to record the exact time of each player's record
 from datetime import datetime
 
-
 # A class that deals with the player's possession (in-game currency)
 
 
