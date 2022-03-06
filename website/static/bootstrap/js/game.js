@@ -15,6 +15,7 @@ var answers = new Array(); // Array for storing all the answers
 var random_set_json = new Array(); // Array for storing the computer-generated random set of numbers
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // Execute a function when the user releases a key on the keyboard => NEEDS FIX! DOESN'T WORK!
 $(document).ready(function() {
     document.getElementById("name").addEventListener("keyup", function(event) {
@@ -29,6 +30,8 @@ $(document).ready(function() {
     });
 });
 
+=======
+>>>>>>> parent of a72f1de (Fixed the background image issue)
 =======
 >>>>>>> parent of a72f1de (Fixed the background image issue)
 // This function runs when the form is submitted... ('next' button is clicked)
