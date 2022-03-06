@@ -26,7 +26,7 @@ Developed by **John Seong** in Ontario.
 ### Beta Release 0.6
 Currently working on the implementation of **additional** features such as the **leaderboard** and the **in-game currency**. The development process for the **base game** is fully **completed**.
 
-<img width="534" alt="Screen Shot 2022-03-06 at 3 20 44 AM" src="https://user-images.githubusercontent.com/35755386/156915228-2ed4ecf4-2ae6-4fe6-a6ef-f72f8f8f6462.png">
+<img width="559" alt="Screen Shot 2022-03-06 at 5 49 29 PM" src="https://user-images.githubusercontent.com/35755386/156945568-a212681c-f287-4d6d-b169-1c1f071d33f1.png">
 
 ---
 
