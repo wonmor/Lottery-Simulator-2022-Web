@@ -87,8 +87,9 @@ def game():
         random_set.generate()
         # Convert the generated random list (Python) into JSON-compatible string, so we can hand it over to game.js
         random_set_result = random_set.current_set
+        chances = random_set.chances
 
-        return_value = {'random_set_json': random_set_result, 'success': True}
+        return_value = {'random_set_json': random_set_result, 'chances': chances, 'success': True}
 
         # Return the values in the return_value dictionary to game.js by converting the dict. to JSON
         return jsonify(return_value)

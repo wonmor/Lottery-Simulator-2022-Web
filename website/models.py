@@ -95,9 +95,10 @@ def calculate_chances(current_set, count):
     """
     Calculate the chances of winning,
     by using the permuation formula
-    and converting it to a percentage.
+    and converting it to a percentage,
+    that is rounded to two decimal places.
     """
-    return str(f'{(1 / len(list(permutations(current_set, count)))) * 100} %')
+    return str(f'{((1 / len(list(permutations(current_set, count)))) * 100):.2f} %')
 
 
 # DEVELOPER'S NOTE AND USEFUL LINKS:

@@ -1,4 +1,6 @@
 // TO DO: MAKE THE BAREBONE APP FIRST AND THEN PRETTIFY IT!
+let increase_count_avail = true;
+
 var counter = 0; // Button counter
 
 var dict = {
@@ -9,6 +11,7 @@ var dict = {
 
 var answers = new Array(); // Array for storing all the answers
 
+// This function runs when the form is submitted... ('next' button is clicked)
 function onClickEvent() {
     $(document).ready(function() {
         // Define all the elements by their ID...
@@ -27,9 +30,39 @@ function onClickEvent() {
             warning.style.display = 'none';
             console.log("counter = " + counter);
             console.log("input_value = " + input_value);
-            answers.push(input_value);
+            // Below is a user input reading logic that determine if the input value exceeds the limitations depending on the type of the question which is determined by the total number of button presses...
+            if (counter == 1) {
+                const max_and_min = input_value.split(" ")
+                const max = max_and_min[0]
+                const min = max_and_min[1]
+                    // Minimum value has to be bigger than or equal to 0, but smaller than 80. Maximum value has to be bigger than zero but smaller or equal to 80. If more than two values are entered by the user, returns error.
+                if (min >= 0 && min <= 79 && max >= 1 && max <= 80 && max_and_min.length <= 2) {
+                    answers.push(input_value);
+                    increase_count_avail = true;
+                } else {
+                    warning.style.display = 'block';
+                    warning.innerHTML = "TOLD YOU TO NOT GO CRAZY!"
+                    increase_count_avail = false;
+                }
+            } else if (counter == 2) {
+                if (input_value >= 1 && input_value <= 20) {
+                    answers.push(input_value);
+                    increase_count_avail = true;
+                } else {
+                    warning.style.display = 'block';
+                    warning.innerHTML = "TOLD YOU TO NOT GO CRAZY!"
+                    increase_count_avail = false;
+                }
+                // If the cases above are not being met just append the value into the array without making exceptions or setting limitations...
+            } else {
+                answers.push(input_value);
+                increase_count_avail = true;
+            }
             console.log("SAVED ANSWER[i] = " + answers[counter]);
-            counter++;
+            // Increase the count only if the data entered by the user is within the predetermined limitations by the program...
+            if (increase_count_avail == true) {
+                counter++;
+            }
             document.forms['frm'].name.value = "";
         }
         console.log("SAVED NAME: " + answers[0]);
@@ -62,8 +95,8 @@ function onClickEvent() {
                     guide_text.innerHTML = "GUESS THE<br>NUMBERS IN A<br>" + answers[dict['draws']] + " * 1 ARRAY!";
                     array_renderer.style.display = 'block';
                     // Parse the JSON file handed over by views.py (set that contains random numbers)
-                    console.log("random_set_json: " + data.random_set_json)
-                    guide_text_2.innerHTML = "F**K YOU, WORDLE. WE ARE BETTER.";
+                    console.log("random_set_json: " + data.random_set_json);
+                    guide_text_2.innerHTML = 'YOUR (REALISTIC) CHANCES OF WINNING: ' + data.chances;
                     // numbers_list.innerHTML = JSON.parse(data.random_set_json);
                     numbers_list.innerHTML = 'ANSWERS (DEBUG): ' + data.random_set_json;
                     input.placeholder = "Enter the values seperated by a space...";
@@ -76,6 +109,8 @@ function onClickEvent() {
             console.log("JSONIFIED NAME: " + JSON.stringify(answers[dict['name']]));
             console.log("JSONIFIED RANGE: " + JSON.stringify(answers[dict['range']]));
             console.log("JSONIFIED DRAWS: " + JSON.stringify(answers[dict['draws']]));
+        } else if (counter == 4) {
+
         }
 
         // WHERE I GOT INSTRUCTIONS FOR AJAX METHOD: https://stackoverflow.com/questions/66939921/problem-sending-data-with-ajax-to-django-server
