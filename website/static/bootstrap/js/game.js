@@ -63,7 +63,7 @@ function onClickEvent() {
                 const max = max_and_min[0]
                 const min = max_and_min[1]
                     // Minimum value has to be bigger than or equal to 0, but smaller than 80. Maximum value has to be bigger than zero but smaller or equal to 80. If more than two values are entered by the user, returns error.
-                if ((min >= 0 && min <= 79) && (max >= 1 && max <= 80) && max_and_min.length <= 2) {
+                if ((min >= -1 && min <= 99) && (max >= 0 && max <= 100) && max_and_min.length <= 2) {
                     answers.push(input_value);
                     increase_count_avail = true;
                 } else {
