@@ -19,7 +19,7 @@
 #
 # TECHNICAL ASPECTS:
 #   Game hosted on a cloud platform Heroku
-#   Used jQuery's AJAX for communication between JAVASCRIPT and PYTHON files (via JSON)
+#   Used jQuery's AJAX for communication between JAVASCRIPT and PYTHON files (via JSON) => ALLOWS MINIMAL AMOUNT OF SCREEN REFRESH
 #   SERVER SIDE HANDLES ALL THE CALCULATIONS AND RANDOM NUMBER GENERATION PROCESS FOR ANTI-CHEAT PURPOSES; CLIENT SIDES ONLY HANDLES THE ON CLICK RESPONSES
 # -----------------------------------------------------------------------------
 # DEVELOPPER'S NOTE:
