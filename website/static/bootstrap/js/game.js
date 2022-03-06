@@ -98,11 +98,11 @@ function onClickEvent() {
         if (counter == 1) {
             console.log("SAVED NAME: " + answers[0]);
             guide_text.innerHTML = "SET THE<br>RANGE OF<br>POSSIBLE<br>NUMBERS";
-            guide_text_2.innerHTML = "DON'T GO TOO CRAZY!";
-            input.placeholder = "Enter min. and max. values seperated by a space...";
+            guide_text_2.innerHTML = "ENTER THE MINIMUM AND MAXIMUM VALUES...";
+            input.placeholder = "Enter the values seperated by a space...";
         } else if (counter == 2) {
             guide_text.innerHTML = "HOW MANY<br>DRAWS?";
-            guide_text_2.innerHTML = "IS MURPHY'S LAW REAL?";
+            guide_text_2.innerHTML = "DO NOT ENTER CRAZY NUMBERS!";
             input.placeholder = "Enter the number of draws...";
         } else if (counter == 3) {
             // Sets up the communication channel between Javascript and Python file via AJAX (uses JSON and HTTP) => a better alternative would be SOCKET
