@@ -143,7 +143,7 @@ function onClickEvent() {
             } else {
                 guide_text_2.innerHTML = "OOPS! YOU GOT THEM WRONG!";
                 guide_text_2.style.color = 'lightcoral';
-                // Add functionality 
+                // TO DO: Add functionality to quit the game (transform the button) AND ALSO update the oops got them wrong/success message at every attempt
             }
         }
         /*
