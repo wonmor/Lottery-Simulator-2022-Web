@@ -27,11 +27,10 @@ $(document).ready(function() {
         return false;
     });
 });
-// This function runs when the form is submitted... ('next' button is clicked)
-document.getElementById("button").addEventListener("click", onClickEvent);
 
-function onClickEvent(event) {
-    event.preventDefault();
+// This function runs when the form is submitted... ('next' button is clicked)
+document.querySelector("#button").addEventListener("click", function onclick(event) {
+    // event.preventDefault();
     $(document).ready(function() {
         // Define all the elements by their ID...
         const input = document.getElementById("name");
@@ -172,4 +171,4 @@ function onClickEvent(event) {
 
         // WHERE I GOT INSTRUCTIONS FOR AJAX METHOD: https://stackoverflow.com/questions/66939921/problem-sending-data-with-ajax-to-django-server
     });
-}
+});
