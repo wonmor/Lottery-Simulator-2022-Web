@@ -1,4 +1,5 @@
-document.addEventListener("DOMContentLoaded", function() {
+// document.addEventListener("DOMContentLoaded", function() {
+$(document).ready(function() {
     // Display the cookie pop-up 4 seconds after the startup => NEEDS FIX! DOESN'T WORK!
     var delayInMilliseconds = 4000; // 4 seconds
 

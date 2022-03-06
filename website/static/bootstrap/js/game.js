@@ -48,7 +48,7 @@ function onClickEvent() {
             $.ajax({
                 url: '/game',
                 type: 'POST',
-                data: JSON.stringify({
+                data: JSON.stringify({ // Make sure you surrounded the data with JSON.stringify MULTIPLE TIMES to avoid any potential error! Data HAS to be in JSON format.
                     nickname: JSON.stringify(answers[dict['name']]),
                     range: JSON.stringify(answers[dict['range']]),
                     draws: JSON.stringify(answers[dict['draws']])
@@ -63,8 +63,9 @@ function onClickEvent() {
                     array_renderer.style.display = 'block';
                     // Parse the JSON file handed over by views.py (set that contains random numbers)
                     console.log("random_set_json: " + data.random_set_json)
-                    numbers_list.innerHTML = JSON.parse(data.random_set_json);
-                    console.log("random_set_json = " + random_set_json)
+                    guide_text_2.innerHTML = "F**K YOU, WORDLE. WE ARE BETTER.";
+                    // numbers_list.innerHTML = JSON.parse(data.random_set_json);
+                    numbers_list.innerHTML = 'ANSWERS (DEBUG): ' + data.random_set_json;
                     input.placeholder = "Enter the values seperated by a space...";
                 },
                 error: function(data) {
