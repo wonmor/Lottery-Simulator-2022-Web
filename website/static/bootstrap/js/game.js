@@ -104,7 +104,7 @@ function onClickEvent() {
         if (counter == 1) {
             console.log("SAVED NAME: " + answers[0]);
             guide_text.innerHTML = "SET THE<br>RANGE OF<br>POSSIBLE<br>NUMBERS";
-            guide_text_2.innerHTML = "ENTER THE MINIMUM AND MAXIMUM VALUES...";
+            guide_text_2.innerHTML = "ENTER THE MINIMUM AND MAXIMUM VALUES... (BELOW 100)";
             input.placeholder = "Enter the values seperated by a space...";
         } else if (counter == 2) {
             guide_text.innerHTML = "HOW MANY<br>DRAWS?";
