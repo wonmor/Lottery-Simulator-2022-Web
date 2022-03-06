@@ -28,7 +28,10 @@ $(document).ready(function() {
     });
 });
 // This function runs when the form is submitted... ('next' button is clicked)
-function onClickEvent() {
+document.getElementById("button").addEventListener("click", onClickEvent);
+
+function onClickEvent(event) {
+    event.preventDefault();
     $(document).ready(function() {
         // Define all the elements by their ID...
         const input = document.getElementById("name");
