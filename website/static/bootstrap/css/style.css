@@ -45,10 +45,9 @@
 }
 
 #master {
-    background-image: url({{ url_for('static', 'img/91477540-geld-nahtlose-muster-linienart-finances-endlosen-hintergrund-geschäft-bank-die-beschaffenheit-mit-do.jpg') }});
-
-    /* background: url('/website/static/img/91477540-geld-nahtlose-muster-linienart-finances-endlosen-hintergrund-geschäft-bank-die-beschaffenheit-mit-do.jpg') => USE AMAZON AWS TO UPLOAD STATIC IMAGES SEPERATELY TO HEROKU!*/
+    background-image: url('/website/static/img/91477540-geld-nahtlose-muster-linienart-finances-endlosen-hintergrund-geschäft-bank-die-beschaffenheit-mit-do.jpg')/* => USE AMAZON AWS TO UPLOAD STATIC IMAGES SEPERATELY TO HEROKU!*/
 }
+
 #array-renderer {
     display: none;
 }
