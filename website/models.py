@@ -98,7 +98,11 @@ def calculate_chances(current_set, count):
     and converting it to a percentage,
     that is rounded to two decimal places.
     """
-    return str(f'{((1 / len(list(permutations(current_set, count)))) * 100):.2f} %')
+    rounded_answer = f'{((1 / len(list(permutations(current_set, count)))) * 100):.2f} %'
+    rounded_answer_without_percentage = float(rounded_answer.replace('%', '').replace(' ', ''))
+    unrounded_answer = f'{((1 / len(list(permutations(current_set, count)))) * 100)} %'
+    # Only return the unrounded answer when the rounded answer (up to 2 decimal places) is NOT accurate enough to display enough information...
+    return rounded_answer if rounded_answer_without_percentage > 0 else unrounded_answer
 
 
 # DEVELOPER'S NOTE AND USEFUL LINKS:

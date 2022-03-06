@@ -1,5 +1,6 @@
 // TO DO: IMPLEMENT THE [WHETHER MATCH OR NOT DETERMINER] THINGY ON THE SERVER SIDE INSTEAD OF THE CLIENT SIDE FOR ANTI-CHEAT PURPOSES!
 let increase_count_avail = true;
+let skip_random_gen = false;
 
 var counter = 0; // Button counter
 
@@ -41,8 +42,12 @@ function onClickEvent() {
         // When no value is entered in the input, throw an error message...
         if (document.forms['frm'].name.value === "") {
             warning.style.display = 'block';
+            // Give an exception to the case when counter = 3: skip the random number generation process (In case the user guesses the number wrong and tries again, do NOT reset the random number set)
+            if (counter == 3) {
+                skip_random_gen = true
+            }
         } else {
-            var input_value = input.value.toString();
+            var input_value = input.value.toString().trim(); // trim() removes whitespaces from both ends of a string
             warning.style.display = 'none';
             console.log("counter = " + counter);
             console.log("input_value = " + input_value);
@@ -104,37 +109,44 @@ function onClickEvent() {
             guide_text.innerHTML = "HOW MANY<br>DRAWS?";
             guide_text_2.innerHTML = "THE COMPUTER CAN DRAW UP TO 10 NUMBERS!";
             input.placeholder = "Enter the number of draws...";
+            skip_random_gen = false;
         } else if (counter == 3) {
-            // Sets up the communication channel between Javascript and Python file via AJAX (uses JSON and HTTP) => a better alternative would be SOCKET
-            $.ajax({
-                url: '/game',
-                type: 'POST',
-                data: JSON.stringify({ // Make sure you surround the data variable(s) with JSON.stringify's MULTIPLE TIMES to avoid any potential error! Data HAS to be in JSON format.
-                    nickname: JSON.stringify(answers[dict['name']]),
-                    range: JSON.stringify(answers[dict['range']]),
-                    draws: JSON.stringify(answers[dict['draws']])
-                }),
-                contentType: 'application/json; charset=utf-8',
-                dataType: 'json',
-                success: function(data) {
-                    console.log("Successful attempt at retrieving the data!");
-                    console.log("content of array: " + answers);
-                    warning.style.display = 'none';
-                    guide_text.innerHTML = "GUESS THE<br>NUMBERS IN A<br>" + answers[dict['draws']] + " * 1 ARRAY!";
-                    array_renderer.style.display = 'block';
-                    // Parse the JSON file handed over by views.py (set that contains random numbers)
-                    console.log("random_set_json: " + data.random_set_json);
-                    guide_text_2.innerHTML = 'YOUR (REALISTIC) CHANCES OF WINNING: ' + data.chances;
-                    // numbers_list.innerHTML = JSON.parse(data.random_set_json);
-                    numbers_list.innerHTML = 'ANSWERS (DEBUG): ' + data.random_set_json;
-                    random_set_json = data.random_set_json;
-                    input.placeholder = "Enter the values seperated by a space...";
-                },
-                error: function(data) {
-                    warning.style.display = 'block';
-                    warning.innerHTML = "ERROR WHILE RETRIEVING THE LIST!"
-                }
-            });
+            if (skip_random_gen != true) {
+                // Sets up the communication channel between Javascript and Python file via AJAX (uses JSON and HTTP) => a better alternative would be SOCKET
+                array_renderer.style.display = 'none';
+                array_renderer.style.display = 'block';
+                numbers_list.innerHTML = 'CALCULATING ALL POSSIBLE PERMUTATIONS...';
+                $.ajax({
+                    url: '/game',
+                    type: 'POST',
+                    data: JSON.stringify({ // Make sure you surround the data variable(s) with JSON.stringify's MULTIPLE TIMES to avoid any potential error! Data HAS to be in JSON format.
+                        nickname: JSON.stringify(answers[dict['name']]),
+                        range: JSON.stringify(answers[dict['range']]),
+                        draws: JSON.stringify(answers[dict['draws']])
+                    }),
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    success: function(data) {
+                        array_renderer.style.display = 'none';
+                        console.log("Successful attempt at retrieving the data!");
+                        console.log("content of array: " + answers);
+                        warning.style.display = 'none';
+                        guide_text.innerHTML = "GUESS THE<br>NUMBERS IN A<br>" + answers[dict['draws']] + " * 1 ARRAY!";
+                        array_renderer.style.display = 'block';
+                        // Parse the JSON file handed over by views.py (set that contains random numbers)
+                        console.log("random_set_json: " + data.random_set_json);
+                        guide_text_2.innerHTML = 'YOUR (REALISTIC) CHANCES OF WINNING: ' + data.chances;
+                        // numbers_list.innerHTML = JSON.parse(data.random_set_json);
+                        numbers_list.innerHTML = 'ANSWERS (DEBUG): ' + data.random_set_json;
+                        random_set_json = data.random_set_json;
+                        input.placeholder = "Enter the values seperated by a space...";
+                    },
+                    error: function(data) {
+                        warning.style.display = 'block';
+                        warning.innerHTML = "ERROR WHILE RETRIEVING THE LIST!"
+                    }
+                });
+            }
             console.log("JSONIFIED NAME: " + JSON.stringify(answers[dict['name']]));
             console.log("JSONIFIED RANGE: " + JSON.stringify(answers[dict['range']]));
             console.log("JSONIFIED DRAWS: " + JSON.stringify(answers[dict['draws']]));
