@@ -1,4 +1,5 @@
 # Lottery Simulator 2022
+## Web Version
 
 ### [Launch Application](https://lottery-simulator-2022.herokuapp.com)
 
