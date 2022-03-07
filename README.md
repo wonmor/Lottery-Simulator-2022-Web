@@ -2,6 +2,8 @@
 
 Developed by **John Seong** in Ontario.
 
+This game was designed to encourage young people not to gamble on lotteries, as the probablity of correctly guessing the number is infinitesimal!
+
 [Launch Application](https://lottery-simulator-2022.herokuapp.com)
 
 ```
