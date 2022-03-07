@@ -39,4 +39,4 @@ Currently working on the implementation of **additional** features such as the *
 
 ---
 
-A special shoutout to **Jason Li** who provided a degree of assistance while I was dealing with the circular import error!
+A special shoutout to [Jason Li](https://github.com/jasonli0616) who provided a degree of assistance while I was dealing with the circular import error!
