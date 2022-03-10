@@ -16,15 +16,14 @@ var random_set_json = new Array(); // Array for storing the computer-generated r
 
 // Execute a function when the user releases a key on the keyboard => NEEDS FIX! DOESN'T WORK!
 $(document).ready(function() {
-    document.getElementById("name").addEventListener("keyup", function(event) {
-        event.preventDefault();
-        event.stopImmediatePropagation();
+    $("#name").keypress(function(event) {
         console.log("Entered the even listener - input field - to detect enter key")
-        if (event.code === 'Enter') {
+        if (event.keyCode === 13) {
+            event.preventDefault();
             document.querySelector("#button").click();
             console.log('ENTER');
         }
-        return false;
+        // return false;
     });
 });
 // This function runs when the form is submitted... ('next' button is clicked)
