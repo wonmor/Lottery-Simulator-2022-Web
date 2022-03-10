@@ -1,6 +1,7 @@
 // TO DO: IMPLEMENT THE [WHETHER MATCH OR NOT DETERMINER] THINGY ON THE SERVER SIDE INSTEAD OF THE CLIENT SIDE FOR ANTI-CHEAT PURPOSES!
 let increase_count_avail = true;
 let skip_random_gen = false;
+let check_onclick_init = false;
 
 var counter = 0; // Button counter
 
@@ -26,6 +27,8 @@ $(document).ready(function() {
         // return false;
     });
 });
+
+
 // This function runs when the form is submitted... ('next' button is clicked)
 function onClickEvent() {
     $(document).ready(function() {
@@ -37,6 +40,8 @@ function onClickEvent() {
         const array_renderer = document.getElementById("array-renderer");
         const numbers_list = document.getElementById("numbers-list");
         const button = document.getElementById("submit");
+
+        check_onclick_init = true;
 
         // When no value is entered in the input, throw an error message...
         if (document.forms['frm'].name.value === "") {
@@ -152,24 +157,51 @@ function onClickEvent() {
             console.log("JSONIFIED DRAWS: " + JSON.stringify(answers[dict['draws']]));
         } else if (counter >= 4) {
             // Check if the user guessed all the number right or not...
-            const guesses = answers[counter - 1].split(" ").map(Number);;
+            const guesses = answers[counter - 1].split(" ").map(Number);
             var random_set = [];
 
             // Convert JSON array into Javascript array
             for (var i in random_set_json)
                 random_set.push(random_set_json[i]);
+
             console.log(guesses);
-            console.log(random_set);
-            // Check if the array that stores user input data matches the computer-generated counterpart...
-            if ((guesses.length == random_set.length) && (guesses.join('|') == random_set.join('|'))) {
-                guide_text_2.innerHTML = 'YOU CORRECTLY GUESSED ALL THE NUMBERS!';
-                guide_text_2.style.color = 'lightgreen';
-            } else {
-                guide_text_2.innerHTML = "OOPS! YOU GOT THEM WRONG!";
-                guide_text_2.style.color = 'lightcoral';
-                // TO DO: Add functionality to quit the game (transform the button) AND ALSO update the oops got them wrong/success message at every attempt
-            }
+            // console.log(random_set);
+
+            // Send an AJAX method to the server in order to determine whether the user got the numbers right or not, NOT on the uesr's side, but on the server's side for security reasons!
+            $.ajax({
+                url: '/game/guess',
+                type: 'POST',
+                data: JSON.stringify({ // Make sure you surround the data variable(s) with JSON.stringify's MULTIPLE TIMES to avoid any potential error! Data HAS to be in JSON format.
+                    guesses: JSON.stringify(guesses),
+                    random_set: JSON.stringify(random_set), // Skipping jsonifying process as it is already in a JSON format...
+                }),
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success: function(data) {
+                    console.log(JSON.parse(data.final_result));
+                    if (JSON.parse(data.final_result) == true) {
+                        guide_text_2.innerHTML = 'YOU CORRECTLY GUESSED ALL THE NUMBERS!';
+                        guide_text_2.style.color = 'lightgreen';
+                    } else {
+                        guide_text_2.innerHTML = "OOPS! YOU GOT THEM WRONG!";
+                        guide_text_2.style.color = 'lightcoral';
+                    }
+                },
+                error: function(data) {
+                    warning.style.display = 'block';
+                    warning.innerHTML = "ANOTHER ERROR WHILE RETRIEVING THE LIST!"
+                }
+            });
         }
+        // // Check if the array that stores user input data matches the computer-generated counterpart...
+        // if ((guesses.length == random_set.length) && (guesses.join('|') == random_set.join('|'))) {
+        //     guide_text_2.innerHTML = 'YOU CORRECTLY GUESSED ALL THE NUMBERS!';
+        //     guide_text_2.style.color = 'lightgreen';
+        // } else {
+        //     guide_text_2.innerHTML = "OOPS! YOU GOT THEM WRONG!";
+        //     guide_text_2.style.color = 'lightcoral';
+        // TO DO: Add functionality to quit the game (transform the button) AND ALSO update the oops got them wrong/success message at every attempt
+        // }
         /*
         } else if (counter >= 5) {
             console.log("Reached count >= 5!")
