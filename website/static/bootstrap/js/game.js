@@ -184,10 +184,10 @@ function onClickEvent() {
                         warning.style.color = 'lightgreen';
                         warning.innerHTML = "INTERNET CONNECTION DETECTED!"
                         resolve_internet_connection = false;
-                        var delayInMilliseconds = 2500; // 1 second
+                        var delayInMilliseconds = 2500; // 2.5 seconds
 
                         setTimeout(function() {
-                            //your code to be executed after 1 second
+                            //your code to be executed after 2.5 seconds
                             warning.style.display = 'none';
                         }, delayInMilliseconds);
 
