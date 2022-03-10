@@ -190,7 +190,6 @@ function onClickEvent() {
                             //your code to be executed after 2.5 seconds
                             warning.style.display = 'none';
                         }, delayInMilliseconds);
-
                     }
                     console.log(JSON.parse(data.final_result));
                     if (JSON.parse(data.final_result) == true) {
