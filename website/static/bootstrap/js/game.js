@@ -189,7 +189,7 @@ function onClickEvent() {
                 },
                 error: function(data) {
                     warning.style.display = 'block';
-                    warning.innerHTML = "ANOTHER ERROR WHILE RETRIEVING THE LIST!"
+                    warning.innerHTML = "CHECK YOUR INTERNET CONNECTION, DARLING?"
                 }
             });
         }

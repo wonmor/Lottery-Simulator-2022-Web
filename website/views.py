@@ -120,7 +120,7 @@ def guess():
         current_app.logger.debug(random_set)
 
         # Check if the list that stores user input data matches the computer-generated counterpart... return True if yes, False if not!
-        return jsonify({'final_result': True}) if functools.reduce(lambda x, y: x and y, map(lambda p, q: p == q, guesses, random_set), True) else jsonify({'final_result': False})
+        return jsonify({'final_result': True}) if (functools.reduce(lambda x, y: x and y, map(lambda p, q: p == q, guesses, random_set), True)) and (len(guesses) is len(random_set)) else jsonify({'final_result': False})
 
 # AJAX METHOD: https://ayumitanaka13.medium.com/how-to-use-ajax-with-python-flask-729c0a8e5346
 
