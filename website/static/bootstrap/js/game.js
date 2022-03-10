@@ -2,6 +2,7 @@
 let increase_count_avail = true;
 let skip_random_gen = false;
 let check_onclick_init = false;
+let resolve_internet_connection = false;
 
 var counter = 0; // Button counter
 
@@ -178,6 +179,19 @@ function onClickEvent() {
                 contentType: 'application/json; charset=utf-8',
                 dataType: 'json',
                 success: function(data) {
+                    if (resolve_internet_connection == true) {
+                        warning.style.display = 'block';
+                        warning.style.color = 'lightgreen';
+                        warning.innerHTML = "INTERNET CONNECTION DETECTED!"
+                        resolve_internet_connection = false;
+                        var delayInMilliseconds = 2500; // 1 second
+
+                        setTimeout(function() {
+                            //your code to be executed after 1 second
+                            warning.style.display = 'none';
+                        }, delayInMilliseconds);
+
+                    }
                     console.log(JSON.parse(data.final_result));
                     if (JSON.parse(data.final_result) == true) {
                         guide_text_2.innerHTML = 'YOU CORRECTLY GUESSED ALL THE NUMBERS!';
@@ -189,7 +203,9 @@ function onClickEvent() {
                 },
                 error: function(data) {
                     warning.style.display = 'block';
-                    warning.innerHTML = "CHECK YOUR INTERNET CONNECTION, DARLING?"
+                    warning.style.color = 'lightcoral';
+                    warning.innerHTML = "CHECK YOUR INTERNET CONNECTION, DARLING?";
+                    resolve_internet_connection = true;
                 }
             });
         }
