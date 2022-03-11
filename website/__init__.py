@@ -3,8 +3,6 @@ from flask import Flask
 
 import logging
 
-import website
-
 import os
 
 
@@ -46,9 +44,6 @@ def register_extensions(app):
 
 # Created a global variable that runs the create_app function, in order to import it from the terminal
 app = create_app()
-
-# Create a SQLAlchemy database
-db.create_all(app=website.create_app())
 
 # HOW TO FIX THE CIRCULAR IMPORT ERROR: https://stackoverflow.com/questions/60142047/in-flask-is-it-possible-to-import-views-using-the-create-app-pattern-without-u
 # DON'T PUSH PYCACHE, DB, AND VENV - ANY REGENERATIVE FILES SHOULDN'T BE PUSHED!

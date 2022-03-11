@@ -25,8 +25,6 @@ class PlayerCurrency(db.Model):
 
     # Store input values into the instance's variables for the syncronization of the leaderboard
     # Nullable means blank; we do not want the name to be blank.
-    id = db.Column(db.Integer, primary_key=True)
-
     name = db.Column(db.String(200), nullable=False)
     # Primary key is always unique! Assigned automatically.
     coins = db.Column(db.Integer, primary_key=True)
@@ -34,7 +32,7 @@ class PlayerCurrency(db.Model):
     successes = db.Column(db.Integer, primary_key=True)
     # Set the default date and time to the UTC standard time
     date_added = db.Column(db.DateTime, default=datetime.utcnow)
-    
+
     def __init__(self, name, successes):
         self.name = name
         self.coins = 0
@@ -47,7 +45,8 @@ class PlayerCurrency(db.Model):
     def add_coin(self):
         # Python's built-in math module allows the developer to use Euler's number in Python
         # As a reminder, e to the power of 0 is 1
-        return self.coins + (20 * math.exp(self.successes)) if self.successes != 0 else self.coins - 20
+        self.coins = self.coins + \
+            (20 * math.exp(self.successes)) if self.successes != 0 else self.coins - 20
 
     # Reset the number of coins that the player possesses
     def reset_coin(self):
@@ -61,18 +60,18 @@ class PlayerCurrency(db.Model):
         config.read(cfg_path)
 
         try:
-            return config.getint("default", "MONEY")
+            self.coins = config.getint("default", "MONEY")
         except:
             print('CFG file failed to load!')
+
+# A class that deals with the set of random numbers picked by the computer
 
 
 class RandomSet():
 
     def __init__(self, min_value, max_value, draws):
-        # Minimum value that the raodom number can be
-        self.min_value = int(min_value)
-        # Maximum value that the random numbers can be
-        self.max_value = int(max_value)
+        self.min_value = int(min_value)  # Minimum value that the raodom number can be
+        self.max_value = int(max_value)  # Maximum value that the random numbers can be
         self.count = int(draws)  # Number of draws
         # A list that contains the set that computer generated, containing machine-picked arbitrary numbers
         self.current_set = []
@@ -100,11 +99,11 @@ def calculate_chances(current_set, count):
     that is rounded to two decimal places.
     """
     rounded_answer = f'{((1 / len(list(permutations(current_set, count)))) * 100):.2f} %'
-    rounded_answer_without_percentage = float(
-        rounded_answer.replace('%', '').replace(' ', ''))
+    rounded_answer_without_percentage = float(rounded_answer.replace('%', '').replace(' ', ''))
     unrounded_answer = f'{((1 / len(list(permutations(current_set, count)))) * 100)} %'
     # Only return the unrounded answer when the rounded answer (up to 2 decimal places) is NOT accurate enough to display enough information...
     return rounded_answer if rounded_answer_without_percentage > 0 else unrounded_answer
+
 
 # DEVELOPER'S NOTE AND USEFUL LINKS:
 # HOW TO READ THE CONFIG.CFG FILE IN A PYTHON SCRIPT: https://stackoverflow.com/questions/45694680/create-enum-constant-in-flask-python
@@ -120,7 +119,7 @@ def calculate_chances(current_set, count):
 
 # HOW TO UPDATE THE REQUIREMENTS FOR REQUIREMENTS.TXT (LIST OF PLUGINS THAT HAVE TO BE INSTALLED WHEN SETTING UP A NEW VIRTUAL ENVIRONMENT - VENV)
 # GO TO TERMINAL, RUN WHATEVER COMMAND THAT NEED TO BE RUNNED (e.g. pip3 install --upgrade pip)
-# RIGHT AFTER, ENTER THIS COMMAND ON TERMINAL: pip freeze > requirements.txt
+# RIGHT AFTER, ENTER THIS COMMAND ON TERMINAL: pip freeze > requirements.txt 
 
 # HOW TO RUN FLASK APP
 # $ export FLASK_APP=hello
