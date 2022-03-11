@@ -1,11 +1,14 @@
-// TO DO: IMPLEMENT THE [WHETHER MATCH OR NOT DETERMINER] THINGY ON THE SERVER SIDE INSTEAD OF THE CLIENT SIDE FOR ANTI-CHEAT PURPOSES!
+// Define the boolean values...
 let increase_count_avail = true;
 let skip_random_gen = false;
 let check_onclick_init = false;
 let resolve_internet_connection = false;
+let whether_user_is_correct = false;
+let leaderboard_avail = false;
 
 var counter = 0; // Button counter
 
+// Dictionary that stores the indeces and their corresponding variables...
 var dict = {
     'name': 0,
     'range': 1,
@@ -22,7 +25,7 @@ $(document).ready(function() {
         console.log("Entered the even listener - input field - to detect enter key")
         if (event.keyCode === 13) {
             event.preventDefault();
-            document.querySelector("#button").click();
+            document.querySelector("#submit-btn").click();
             console.log('ENTER');
         }
         // return false;
@@ -40,9 +43,12 @@ function onClickEvent() {
         const guide_text_2 = document.getElementById("guide-text-2");
         const array_renderer = document.getElementById("array-renderer");
         const numbers_list = document.getElementById("numbers-list");
-        const button = document.getElementById("submit");
+        const button = document.getElementById("submit-btn");
 
+        // Define all the boolean values...
+        leaderboard_avail = false;
         check_onclick_init = true;
+        input.disabled = false;
 
         // When no value is entered in the input, throw an error message...
         if (document.forms['frm'].name.value === "") {
@@ -98,8 +104,10 @@ function onClickEvent() {
             }
             console.log("SAVED ANSWER[i] = " + answers[counter]);
             // Increase the count only if the data entered by the user is within the predetermined limitations by the program...
-            if (increase_count_avail == true) {
+            if (increase_count_avail == true && leaderboard_avail == false) {
                 counter++;
+            } else if (leaderboard_avail == true) {
+                counter = 69; // Run the leaderboard function...
             }
             document.forms['frm'].name.value = "";
         }
@@ -156,7 +164,7 @@ function onClickEvent() {
             console.log("JSONIFIED NAME: " + JSON.stringify(answers[dict['name']]));
             console.log("JSONIFIED RANGE: " + JSON.stringify(answers[dict['range']]));
             console.log("JSONIFIED DRAWS: " + JSON.stringify(answers[dict['draws']]));
-        } else if (counter >= 4) {
+        } else if (counter >= 4 && leaderboard_avail == false) {
             // Check if the user guessed all the number right or not...
             const guesses = answers[counter - 1].split(" ").map(Number);
             var random_set = [];
@@ -174,7 +182,7 @@ function onClickEvent() {
                 type: 'POST',
                 data: JSON.stringify({ // Make sure you surround the data variable(s) with JSON.stringify's MULTIPLE TIMES to avoid any potential error! Data HAS to be in JSON format.
                     guesses: JSON.stringify(guesses),
-                    random_set: JSON.stringify(random_set), // Skipping jsonifying process as it is already in a JSON format...
+                    random_set: JSON.stringify(random_set),
                 }),
                 contentType: 'application/json; charset=utf-8',
                 dataType: 'json',
@@ -192,9 +200,13 @@ function onClickEvent() {
                         }, delayInMilliseconds);
                     }
                     console.log(JSON.parse(data.final_result));
-                    if (JSON.parse(data.final_result) == true) {
+                    whether_user_is_correct = JSON.parse(data.final_result);
+                    if (whether_user_is_correct == true) {
                         guide_text_2.innerHTML = 'YOU CORRECTLY GUESSED ALL THE NUMBERS!';
                         guide_text_2.style.color = 'lightgreen';
+                        input.disabled = true;
+                        leaderboard_avail = true;
+                        button.textContent = 'VIEW LEADERBOARD';
                     } else {
                         guide_text_2.innerHTML = "OOPS! YOU GOT THEM WRONG!";
                         guide_text_2.style.color = 'lightcoral';
@@ -207,6 +219,52 @@ function onClickEvent() {
                     resolve_internet_connection = true;
                 }
             });
+            // SHow Leaderboard
+        } else if (counter == 69) {
+            $.ajax({
+                url: '/game/leaderboard',
+                type: 'POST',
+                data: JSON.stringify({ // Make sure you surround the data variable(s) with JSON.stringify's MULTIPLE TIMES to avoid any potential error! Data HAS to be in JSON format.
+                    whether_user_is_correct: JSON.stringify(whether_user_is_correct)
+                }),
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success: function(data) {
+                    if (resolve_internet_connection == true) {
+                        warning.style.display = 'block';
+                        warning.style.color = 'lightgreen';
+                        warning.innerHTML = "INTERNET CONNECTION DETECTED!"
+                        resolve_internet_connection = false;
+                        var delayInMilliseconds = 2500; // 2.5 seconds
+
+                        setTimeout(function() {
+                            //your code to be executed after 2.5 seconds
+                            warning.style.display = 'none';
+                        }, delayInMilliseconds);
+                    }
+                    // Run this command when the form is successfully retrieved...
+                    max_coins_list = JSON.parse(data.max_coins_list);
+                    top_players_list = JSON.parse(data.top_players_list);
+
+                    guide_text.innerHTML = 'LEADERBOARD';
+                    guide_text_2.style.color = 'white';
+                    // Print out all the indices as well as their corresponding values...
+                    for (var i = 0; i < max_coins_list.length; i++) {
+                        guide_text_2.innerHTML += (max_coins_list[i] + '. ' + top_players_list[i] + '<br>');
+                    }
+                    input.style.display = 'none';
+                    warning.style.display = 'none';
+                    array_renderer.style.display = 'none';
+                },
+                error: function(data) {
+                    warning.style.display = 'block';
+                    warning.style.color = 'lightcoral';
+                    warning.innerHTML = "CHECK YOUR INTERNET CONNECTION, DARLING?";
+                    resolve_internet_connection = true;
+                }
+            });
+        } else {
+            console.log("Fatal error occured!");
         }
         // // Check if the array that stores user input data matches the computer-generated counterpart...
         // if ((guesses.length == random_set.length) && (guesses.join('|') == random_set.join('|'))) {

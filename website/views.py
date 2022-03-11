@@ -1,8 +1,7 @@
 from email.policy import default
 from random import Random
 from flask import Blueprint, render_template, request, session, jsonify, current_app
-
-# from flask import current_app as app
+from sqlalchemy import func
 
 import configparser
 
@@ -65,6 +64,7 @@ def about():
 
 @bp.route('/game', methods=['GET', 'POST'])
 def game():
+    global player_name
     if request.method == 'POST':
         current_app.logger.debug('trying to get json form...')
 
@@ -110,17 +110,65 @@ def game():
 
 @bp.route('/game/guess', methods=['POST'])
 def guess():
+    global num_of_successes
     if request.method == 'POST':
         guesses = json.loads(request.get_json(
             force=False, silent=False, cache=True).get('guesses'))
         random_set = json.loads(request.get_json(
             force=False, silent=False, cache=True).get('random_set'))
 
+        num_of_successes = 0
+
         current_app.logger.debug(guesses)
         current_app.logger.debug(random_set)
 
+        for i in range(len(random_set) - 1):
+            if guesses[i] == random_set[i]:
+                num_of_successes += 1
+
         # Check if the list that stores user input data matches the computer-generated counterpart... return True if yes, False if not!
-        return jsonify({'final_result': True}) if (functools.reduce(lambda x, y: x and y, map(lambda p, q: p == q, guesses, random_set), True)) and (len(guesses) is len(random_set)) else jsonify({'final_result': False})
+        return jsonify({'final_result': True, 'num_of_successes': num_of_successes}) if (functools.reduce(lambda x, y: x and y, map(lambda p, q: p == q, guesses, random_set), True)) and (len(guesses) is len(random_set)) else jsonify({'final_result': False})
+
+
+@bp.route('/game/leaderboard', methods=['POST'])
+def leaderboard():
+    global max_coins_list
+    if request.method == 'POST':
+        # Define lists and variables
+        max_coins_list = []
+        top_players_list = []
+        max_coins_index = 0
+
+        # Store the user's new record in the database
+        whether_user_is_correct = json.loads(request.get_json(
+            force=False, silent=False, cache=True).get('whether_user_is_correct'))
+        if whether_user_is_correct == True:
+            player = PlayerCurrency.query.filter_by(name=player_name).first()
+            if player is None:
+                player = PlayerCurrency(player_name, num_of_successes)
+                db.session.add(player)
+                db.session.commit()
+            else:
+                player.successes = num_of_successes
+                db.session.commit()
+            player.coins = player.add_coin()
+            db.session.commit()
+
+        # Rank the leaderboard highest to lowest game currency and print them out
+        max_coins = PlayerCurrency.query.order_by(
+            PlayerCurrency.coins.desc()).limit(10).all()
+
+        # Deserialize the max_coins
+        for max_coin in max_coins:
+            max_coins_list.append(max_coin.coins)
+            # When there're e.g. two players who have the same amount of coin, the program will append both results into one entry of the list
+            top_players_list.append(db.session.query(PlayerCurrency).filter(
+                PlayerCurrency.coins == max_coins_list[max_coins_index]).all())
+            max_coins_index += 1
+
+        # Return a list of the top ten players who have the most coins...
+        return jsonify({'max_coins_list': max_coins_list, 'top_players_list': top_players_list})
+
 
 # AJAX METHOD: https://ayumitanaka13.medium.com/how-to-use-ajax-with-python-flask-729c0a8e5346
 
