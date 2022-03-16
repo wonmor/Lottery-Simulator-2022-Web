@@ -1,10 +1,17 @@
 from .extensions import db
 from flask import Flask
+from dotenv import load_dotenv
 
 import logging
 
 import os
 
+# COMMAND + K and then COMMAND + C to comment multiple lines on VSCode
+
+# FLASK ENVIRONMENT EXPLANATION: https://pythonbasics.org/flask-environment-production/
+
+# HOW TO SET UP SECRET_KEY ON HEROKU: https://stackoverflow.com/questions/47949022/git-heroku-how-to-hide-my-secret-key
+# COMMAND (RUN ON TERMINAL): heroku config:set SECRET_KEY='<ENTER SECRET KEY>' -a lottery-simulator-2022
 
 def create_app():
     # Initialize the app
@@ -16,17 +23,20 @@ def create_app():
 
     app.logger.debug('App init!')
 
+    load_dotenv()
+
+    app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")
+
     app.register_blueprint(views.bp)
     # SETTING UP THE BLUEPRINT TO PREVENT CIRCULAR IMPORT; TUTORIAL: https://stackoverflow.com/questions/23432791/how-to-handle-dynamic-decorators-in-python-easily
 
     # HOW TO OUTSOURCE SECRET KEY SO THAT IT DOES NOT GET COMMITED TO GITHUB: https://stackoverflow.com/questions/51228227/standard-practice-for-wsgi-secret-key-for-flask-applications-on-github-reposito
 
     # Load the config
-    app.config.update(
-        TESTING=True,
-        SECRET_KEY='192b9bdd22ab9ed4d12e236c78afcb9a393ec15f71bbf5dc987d54727823bcbf',
-        DEBUG=True
-    )
+    # app.config.update(
+    #     TESTING=True,
+    #     DEBUG=True
+    # )
     # app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY") => FOR DISTRIBUTION PURPOSES (TO HIDE THE API KEY)
 
     # Add SQLAlchemy database
