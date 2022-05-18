@@ -42,7 +42,7 @@ if __name__ == '__main__':
 #   2. PlayerCurrency class in models.py // Deals with the in-game currency (object-oriented approach)
 #   3. RandomSet class in models.py // Deals with the random set with random numbers, which the computer generated (object-oriented approach)
 #   4. views.py // Defines button click events as well as routing different tags that come after the URL (functional approach)
-#   5. /website/static/bootstrap/js/game.js // Deals with different front-end related behaviours such as sending appropriate responses when a certain button is clicked or to record the user input, converting it to JSON, and sending it to the server side a.k.a. python script (functional approach)
+#   5. /website/static/js/*.js // Deals with different front-end related behaviours such as sending appropriate responses when a certain button is clicked or to record the user input, converting it to JSON, and sending it to the server side a.k.a. python script (functional approach)
 
 # NOTE: Don't comment every line, just comment major ones!
 
