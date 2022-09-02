@@ -1,8 +1,7 @@
 # FOR BACK-END DEPLOYMENT... (FLASK)
 FROM python:3.10.4-slim
 WORKDIR /
-# Don't forget "--from"! It acts as a bridge that connects two seperate stages
-COPY --from=build-step app ./app
+COPY app ./app
 WORKDIR /app
 RUN apt-get update && apt-get install -y python3-dev && python3 -m pip install --upgrade pip
 COPY requirements.txt ./
