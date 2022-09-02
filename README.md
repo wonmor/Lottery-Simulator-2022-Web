@@ -1,6 +1,6 @@
 # Lottery Simulator 2022 for Web
 
-### [Launch Application](https://lottery-simulator-2022.herokuapp.com)
+### [Launch Application](https://lotterysimulator.apps.johnseong.info)
 
 - Developed by **John Seong** in Ontario.
 - This game was designed to encourage young people not to gamble on lotteries, as the probablity of correctly guessing the number is infinitesimal!
