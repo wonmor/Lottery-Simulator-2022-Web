@@ -34,7 +34,7 @@ app = create_app()
 
 # When initialized, start the app
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0')
 
 #   Go to the app folder to check out the full code! This is only a fraction of what I've written.
 # 
